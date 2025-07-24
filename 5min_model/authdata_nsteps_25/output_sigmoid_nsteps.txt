@@ -1,0 +1,7 @@
+Nsteps: 25
+Layer_width: 140
+Stage cost: 7604.34765625
+Optimal Stage cost: 7396.062553503865
+Suboptimality: 2.816%
+Scale coeff: 10.0
+Number of parameters: 86803
