@@ -46,13 +46,6 @@ class PreviewSystem(System):
                     if (k in self.preview_keys and node.name in self.preview_node_name)
                     else data[k][:, i]) for k in node.input_keys
                 }
-                # print(indata['X'].shape)     
-                # try:
-                # #     # print(indata['U'].shape)  
-                #     print(node.name)   
-                #     print(indata['D'].shape)     
-                # except:
-                #     pass
                 outdata = node(indata)  # compute
                 data = self.cat(data, outdata)  # feed the data nodes
         return data  # return recorded system measurements
@@ -70,13 +63,6 @@ class PreviewSystem(System):
                     if (k in self.preview_keys and node.name in self.preview_node_name)
                     else sim_data[k][:, i]) for k in node.input_keys
                 }
-                # try:
-                # #     # print(indata['U'].shape)  
-                #     print(i)
-                #     print(node.name)   
-                #     print(indata['D'])     
-                # except:
-                #     pass
                 outdata = node(indata)
                 sim_data = self.cat(sim_data, outdata)
         return sim_data
