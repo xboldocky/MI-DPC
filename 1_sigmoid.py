@@ -225,8 +225,8 @@ for nsteps in [20]:
                     state1_con_u,
                     state2_con_l,
                     state2_con_u,
-                    input3_con_l,
-                    input3_con_u,
+                    # input3_con_l,
+                    # input3_con_u,
                                 ]
 
     loss = PenaltyLoss(objectives, constraints)
@@ -254,7 +254,7 @@ for nsteps in [20]:
         patience=80,
         epoch_verbose=1,
         device=device,
-        # clip=2.0,
+        clip=torch.inf,
         lr_scheduler=False,
         # logger=logger
     )
