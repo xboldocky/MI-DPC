@@ -19,15 +19,16 @@ from neuromancer.loggers import BasicLogger
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-import systempreview
+from utils import systempreview
 import importlib
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 default_type = torch.float32
 torch.set_default_dtype(default_type)
 class RelaxedRoundingFunction(torch.autograd.Function):
     @staticmethod
     def forward(ctx, input, scale=1.0):
-        ctx.save_for_backward(input)
+        ctx.save_for_backward(input+0.5)
         ctx.scale = scale
         # scaled sigmod to approximate rounding
         rounded = torch.round(input)
@@ -40,8 +41,6 @@ class RelaxedRoundingFunction(torch.autograd.Function):
         sigmoid_approx = torch.sigmoid(scale*(input-torch.round(input)))
         grad_input = grad_output*sigmoid_approx*(1-sigmoid_approx)*scale
         return grad_input, None
-
-
 
 temperature_coefficient = 10.0
 def relaxed_round(input, scale=temperature_coefficient):
@@ -77,8 +76,6 @@ torch.set_default_device(device)
 for nsteps in [20]:
     torch.manual_seed(208)
 
-# for nsteps in [20]:
-# nsteps = 10
     A = torch.tensor([[alpha_1, ni], [0, alpha_2-ni]])
     B = torch.diag(torch.tensor([betta_1, betta_2]))
     B_delta = torch.tensor([[0],[betta_3*q_hr0]])
@@ -94,7 +91,6 @@ for nsteps in [20]:
     # nsteps = 40
     #%% Policy network architecture
     input_features = nx+nref+(nd*(nsteps))
-    # layer_width = 120+(nsteps) #500 without bn works best
     layer_width = 140 #500 without bn works best
     class policy(torch.nn.Module):
         def __init__(self):
@@ -127,9 +123,6 @@ for nsteps in [20]:
             else:
                 x = inputs[0]
             x = torch.nn.functional.tanh(self.fc_input(x))  # Common Input Layer
-            # x = self.fc_input(x)  # Common Input Layer
-            # x = self.dropout(x)
-            # x1, x2 = self.bn_input(x), self.bn_input(x)
             x = self.bn_input(x)
             
             x1 = torch.nn.functional.tanh(self.fc1_x1(x)) # First branch
@@ -138,23 +131,15 @@ for nsteps in [20]:
             x1 = torch.nn.functional.tanh(self.fc2_x1(x1))
             x1 = self.bn2_x1(x1)
             x1 = self.dropout(x1)
-            # x1 = torch.nn.functional.selu(self.fc3_x1(x1))
-            # x1 = self.bn3_x1(x1)
-            # x1 = self.dropout(x1)
             out1 = self.fc_output_x1(x1)
 
             x2 = torch.nn.functional.selu(self.fc1_x2(x)) # Second branch
             x2 = self.bn1_x2(x2)
-            # x2 = self.dropout(x2)
             x2 = torch.nn.functional.selu(self.fc2_x2(x2))
             x2 = self.bn2_x2(x2)
-            # x2 = self.dropout(x2)
-            # x2 = torch.nn.functional.selu(self.fc3_x2(x2))
-            # x2 = self.bn3_x2(x2)
-            # if self.training and x2.grad is not None: 
-                # x2.grad = x2.grad + torch.randn(x2.grad.shape)*0.0001
-            out2 = relaxed_round(blocks.relu_clamp(self.fc_output_x2(x2), -0.49, 3.49)) # Rounding
-            # out2 = relaxed_round(self.fc_output_x2(x2)) # Rounding
+            # out2 = relaxed_round(blocks.relu_clamp(self.fc_output_x2(x2), -0.49, 3.49)) # Rounding
+            # out2 = relaxed_round(torch.clip(self.fc_output_x2(x2), -0.49, 3.49)) # Rounding
+            out2 = relaxed_round(self.fc_output_x2(x2)) # Rounding
             
             return torch.cat((out1,out2), dim=1) # Return u1,u2,u3
 
@@ -167,28 +152,13 @@ for nsteps in [20]:
     cl_system = systempreview.PreviewSystem([mip_node, system], preview_keys=['D'], preview_node_name='mip_policy')
     cl_system.nsteps = nsteps # prediction horizon
 
-    # %%Forward Test
-    test_input = {'X': torch.rand(1,1,nx),'D': torch.rand(1,nsteps,nd)}
-    test_result = cl_system(test_input)
-
-    # Simulator test
-    s_length = 116
-    refs1_sim = torch.tensor([[[ref1]]]).repeat_interleave(s_length, dim=1)
-    refs2_sim = torch.tensor([[[ref2]]]).repeat_interleave(s_length, dim=1)
-    refs = torch.cat((refs1_sim,refs2_sim), dim=-1)
-    dists = torch.rand(1,s_length,2)
-    data = {'X': torch.zeros(1, 1, nx),
-            'R': refs,
-            'D': dists}
-    trajectories = cl_system.simulate(data)
-
     #%% Training Data
     num_data = 24000
     num_dev_data = 4000
     batch_size = 2000
     nref = nx
-
-    d = scipy.io.loadmat("newloads_matrix.mat")
+    file_path = os.path.join(script_dir, 'loads_matrix.mat')
+    d = scipy.io.loadmat(file_path)
     d_tensor = torch.tensor(d['newloads_matrix'], dtype=default_type, device=device)
 
     d1 = d_tensor[:,0]
@@ -196,24 +166,13 @@ for nsteps in [20]:
 
     x1_train = torch.empty(num_data, 1, 1, dtype=default_type).uniform_(x1_min, x1_max)
     x2_train = torch.empty(num_data, 1, 1, dtype=default_type).uniform_(x2_min, x2_max)
-    # x1_train_2 = torch.empty(4000, 1, 1, dtype=default_type).uniform_(ref1-1.0, ref1+1.0)
-    # x2_train_2 = torch.empty(4000, 1, 1, dtype=default_type).uniform_(ref2-0.2, ref2+0.1)
-
-    # x1_train = torch.cat((x1_train,x1_train_2), dim=0)
-    # x2_train = torch.cat((x2_train,x2_train_2), dim=0)
     x_train = torch.cat((x1_train, x2_train), dim=2)
 
     x1_dev = torch.empty(num_dev_data, 1, 1, dtype=default_type).uniform_(x1_min, x1_max)
     x2_dev = torch.empty(num_dev_data, 1, 1, dtype=default_type).uniform_(x2_min, x2_max)
-    # x1_dev_2 = torch.empty(2000, 1, 1, dtype=default_type).uniform_(ref1-1.0, ref1+1.0)
-    # x2_dev_2 = torch.empty(2000, 1, 1, dtype=default_type).uniform_(ref2-0.2, ref2+0.1)
-
-    # x1_dev = torch.cat((x1_dev,x1_dev_2), dim=0)
-    # x2_dev = torch.cat((x2_dev,x2_dev_2), dim=0)
-
     x_dev = torch.cat((x1_dev, x2_dev), dim=2)
 
-    dist_data = torch.load(f'extended_disturbances_60.pt')
+    dist_data = torch.load(f'{script_dir}/training_dist_data/extended_disturbances_60.pt')
     dist_data = torch.tensor(dist_data, dtype=default_type, device=device)
     #%% DataLoaders
     train_data = DictDataset({'X': x_train.to(device), 'D': dist_data[:num_data,:nsteps,:].to(device)}, name='train')  # Split conditions into train and dev
@@ -233,9 +192,7 @@ for nsteps in [20]:
     integer_loss = 0.1*(u[:,:,[2]] == 0.0)^2
     regulation_loss1 = 1.0*(x[:,:,[0]] == ref1)^2  # target position
     regulation_loss2 = 1.0*(x[:,:,[1]] == ref2)^2  # target position
-    # state_smoothing = 1.0*((x[:, 1:, [1]] == x[:, :-1, [1]])^2)
-
-    # state_smoothing.name = 'state_smoothing'
+ 
     action_loss1.name, action_loss2.name, integer_loss.name = 'action_loss1', 'action_loss2', 'integer_input_loss'
     regulation_loss1.name, regulation_loss2.name = 'control_state1', 'control_state2'
 
@@ -268,9 +225,8 @@ for nsteps in [20]:
                     state1_con_u,
                     state2_con_l,
                     state2_con_u,
-
-                    # input3_con_l,
-                    # input3_con_u,
+                    input3_con_l,
+                    input3_con_u,
                                 ]
 
     loss = PenaltyLoss(objectives, constraints)
@@ -296,16 +252,16 @@ for nsteps in [20]:
         eval_metric='dev_loss',
         warmup=20,
         patience=80,
-        epoch_verbose=10,
+        epoch_verbose=1,
         device=device,
-        clip=2.0,
+        # clip=2.0,
         lr_scheduler=False,
-        logger=logger
+        # logger=logger
     )
     best_model = trainer.train()
 
     trainer.model.load_state_dict(best_model) # load best trained model
-    torch.save(cl_system.state_dict(), f'authdata_nsteps_{nsteps}/softround_states_model.pt')
+    # torch.save(cl_system.state_dict(), f'authdata_nsteps_{nsteps}/softround_states_model.pt')
 
     # %%
     """
@@ -337,17 +293,17 @@ for nsteps in [20]:
 
 
     try:
-        u1_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N{nsteps}_Q11.mat")['u1']
-        u2_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N{nsteps}_Q11.mat")['u2']
-        u3_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N{nsteps}_Q11.mat")['u3']
-        x1_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N{nsteps}_Q11.mat")['x1']
-        x2_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N{nsteps}_Q11.mat")['x2']
+        u1_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N{nsteps}_Q11.mat")['u1']
+        u2_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N{nsteps}_Q11.mat")['u2']
+        u3_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N{nsteps}_Q11.mat")['u3']
+        x1_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N{nsteps}_Q11.mat")['x1']
+        x2_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N{nsteps}_Q11.mat")['x2']
     except:
-        u1_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N30_Q11.mat")['u1']
-        u2_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N30_Q11.mat")['u2']
-        u3_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N30_Q11.mat")['u3']
-        x1_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N30_Q11.mat")['x1']
-        x2_opt = scipy.io.loadmat(f"optimal_5_min_conservative_ocp/6.5days_N30_Q11.mat")['x2']
+        u1_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N30_Q11.mat")['u1']
+        u2_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N30_Q11.mat")['u2']
+        u3_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N30_Q11.mat")['u3']
+        x1_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N30_Q11.mat")['x1']
+        x2_opt = scipy.io.loadmat(f"{script_dir}/old_data/6.5days_N30_Q11.mat")['x2']
 
     # u1_opt = scipy.io.loadmat(f"optimal_5_min/Hp40.mat")['u1']
     # u2_opt = scipy.io.loadmat(f"optimal_5_min/Hp40.mat")['u2']
@@ -479,9 +435,9 @@ for nsteps in [20]:
     ax[3,1].grid()
     fig1.tight_layout()
     plt.grid()
-    fig1.savefig(f'authdata_nsteps_{nsteps}/sigmoid_states_eval.pdf', bbox_inches='tight')
+    # fig1.savefig(f'authdata_nsteps_{nsteps}/sigmoid_states_eval.pdf', bbox_inches='tight')
 
-    # plt.show()
+    plt.show()
     #%%
     def count_parameters(model):
         return sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -500,6 +456,6 @@ for nsteps in [20]:
         file.write(f"Scale coeff: {temperature_coefficient}\n")
         file.write(f"Number of parameters: {n_parameters}\n")
 
-    torch.save(trajectories, f"authdata_nsteps_{nsteps}/sigmoid_trajectories.pt")
+    # torch.save(trajectories, f"authdata_nsteps_{nsteps}/sigmoid_trajectories.pt")
 
     # %%
