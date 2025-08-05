@@ -37,11 +37,7 @@ class PreviewSystem(System):
             # print(i)
             for node in self.nodes:
                 indata = {
-                    # encoding --- first feature for whole horizon, next feature, etc..
-                    # k: (data[k].swapaxes(1,2).reshape(data[k].size(0), -1)
                     # encoding --- first timestep for all features, next timestep, etc..
-                    # k: (data[k].reshape(data[k].size(0), -1) 
-                    # k: (nn.functional.pad(data[k].reshape(data[k].size(0), -1), (0,20), mode='constant', value=0)[:,i*2:i*2+nsteps*2] 
                     k: (nn.functional.pad(data[k].reshape(data[k].size(0), -1), (0,nsteps*2), mode='constant', value=0)[:,i*2:i*2+nsteps*2] 
                     if (k in self.preview_keys and node.name in self.preview_node_name)
                     else data[k][:, i]) for k in node.input_keys
@@ -66,4 +62,3 @@ class PreviewSystem(System):
                 outdata = node(indata)
                 sim_data = self.cat(sim_data, outdata)
         return sim_data
-# %%
