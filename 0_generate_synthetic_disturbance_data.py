@@ -57,7 +57,7 @@ d1_beta=np.random.beta(0.6,1.4, time_series.shape[0])*7.0
 d1_torch = torch.tensor(d1_beta).unsqueeze(-1).unfold(0,nsteps,1).swapaxes(1,-1)
 d2_torch = torch.tensor(time_series).unsqueeze(-1).unfold(0,nsteps,1).swapaxes(1,-1)
 tensor_2d_data = torch.cat((d1_torch,d2_torch), dim=-1)
-# torch.save(tensor_2d_data, 'extended_disturbances_60.pt')
+# torch.save(tensor_2d_data, 'training_dist_data/extended_disturbances_60.pt')
 
 #%% Load test data
 d = scipy.io.loadmat("loads_matrix.mat") 
