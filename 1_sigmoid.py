@@ -1,14 +1,9 @@
 
 # %%
 import os, sys
-current_file_path = os.path.dirname(os.path.abspath(__file__))
-if current_file_path.split('5')[0] not in sys.path:
-    sys.path.append(current_file_path.split('5')[0])
-    # sys.path.append(current_file_path)
-
 import torch
 from neuromancer.system import Node, System
-from neuromancer.modules import blocks
+from neuromancer.modules import blocks, functions
 from neuromancer.dataset import DictDataset
 from neuromancer.constraint import variable
 from neuromancer.loss import PenaltyLoss, BarrierLoss, AugmentedLagrangeLoss
@@ -72,23 +67,21 @@ ref2 = 1.8
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.set_default_device(device)
 
+A = torch.tensor([[alpha_1, ni], [0, alpha_2-ni]])
+B = torch.diag(torch.tensor([betta_1, betta_2]))
+B_delta = torch.tensor([[0],[betta_3*q_hr0]])
+B = torch.cat((B,B_delta),dim=1)
+E = torch.diag(torch.tensor([-betta_4, -betta_5]))
+C = torch.eye(2)
+ss_model = lambda x, u, d: x @ A.T + u @ B.T + d @ E.T # training model
+nx = A.shape[0]
+nu = B.shape[1]
+nd = E.shape[1]  
+nref = 0
+
 # for nsteps in [10,15,20,25,30,40]:
 for nsteps in [20]:
     torch.manual_seed(208)
-
-    A = torch.tensor([[alpha_1, ni], [0, alpha_2-ni]])
-    B = torch.diag(torch.tensor([betta_1, betta_2]))
-    B_delta = torch.tensor([[0],[betta_3*q_hr0]])
-    B = torch.cat((B,B_delta),dim=1)
-    E = torch.diag(torch.tensor([-betta_4, -betta_5]))
-    C = torch.eye(2)
-    #%%
-    ss_model = lambda x, u, d: x @ A.T + u @ B.T + d @ E.T # training model
-    nx = A.shape[0]
-    nu = B.shape[1]
-    nd = E.shape[1]  
-    nref = 0
-    # nsteps = 40
     #%% Policy network architecture
     input_features = nx+nref+(nd*(nsteps))
     layer_width = 140 #500 without bn works best
@@ -99,12 +92,10 @@ for nsteps in [20]:
         
             self.fc1_x1 = torch.nn.Linear(layer_width, layer_width)  # Layers for the first branch
             self.fc2_x1 = torch.nn.Linear(layer_width, layer_width) 
-            self.fc3_x1 = torch.nn.Linear(layer_width, layer_width) 
             self.fc_output_x1 = torch.nn.Linear(layer_width, 2, bias=True) 
         
             self.fc1_x2 = torch.nn.Linear(layer_width, layer_width)   # Layers for the second branch
             self.fc2_x2 = torch.nn.Linear(layer_width, layer_width)  
-            self.fc3_x2 = torch.nn.Linear(layer_width, layer_width)  
             self.fc_output_x2 = torch.nn.Linear(layer_width, 1, bias=True) 
             
             self.bn_input = torch.nn.LayerNorm(layer_width, elementwise_affine=False) # Common Input BN
@@ -114,7 +105,6 @@ for nsteps in [20]:
             
             self.bn1_x2 = torch.nn.LayerNorm(layer_width, elementwise_affine=False) # Second branch BN
             self.bn2_x2 = torch.nn.LayerNorm(layer_width, elementwise_affine=False)        
-            del self.fc3_x1, self.fc3_x2
             self.dropout = torch.nn.Dropout(0.1) # Dropout object
 
         def forward(self, *inputs):
@@ -137,9 +127,9 @@ for nsteps in [20]:
             x2 = self.bn1_x2(x2)
             x2 = torch.nn.functional.selu(self.fc2_x2(x2))
             x2 = self.bn2_x2(x2)
-            # out2 = relaxed_round(blocks.relu_clamp(self.fc_output_x2(x2), -0.49, 3.49)) # Rounding
+            out2 = relaxed_round(functions.bounds_clamp(self.fc_output_x2(x2), -0.49, 3.49)) # Rounding
             # out2 = relaxed_round(torch.clip(self.fc_output_x2(x2), -0.49, 3.49)) # Rounding
-            out2 = relaxed_round(self.fc_output_x2(x2)) # Rounding
+            # out2 = relaxed_round(self.fc_output_x2(x2)) # Rounding
             
             return torch.cat((out1,out2), dim=1) # Return u1,u2,u3
 
@@ -246,7 +236,7 @@ for nsteps in [20]:
         problem.to(device),
         train_loader, dev_loader,
         optimizer=optimizer,
-        epochs=1000,
+        epochs=100,
         train_metric='train_loss',
         dev_metric='dev_loss',
         eval_metric='dev_loss',
