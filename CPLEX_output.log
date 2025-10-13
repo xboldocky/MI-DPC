@@ -1,0 +1,156 @@
+/home/desktop309/git/MI-DPC_Conference_paper/_1_CPLEX.py:43: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments. To learn more, see the migration guide https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword
+  initial_tensor = np.array(initial_conditions.x0_tensor)  # shape (20,2)
+RUNNING EXPERIMENTS WITH HORIZON N=10
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [01:02<19:49, 62.58s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [02:05<18:45, 62.53s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [03:07<17:42, 62.50s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [04:09<16:39, 62.46s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [05:12<15:37, 62.48s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [06:14<14:34, 62.47s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [07:17<13:32, 62.47s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [08:19<12:29, 62.48s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [09:22<11:27, 62.46s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [10:24<10:24, 62.46s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [11:27<09:21, 62.43s/it]Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [12:29<08:19, 62.41s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [13:31<07:16, 62.39s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [14:34<06:14, 62.44s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [15:36<05:12, 62.43s/it]Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [16:39<04:09, 62.42s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [17:41<03:07, 62.45s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [18:44<02:04, 62.46s/it]Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [19:46<01:02, 62.45s/it]Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [20:48<00:00, 62.43s/it]Simulating IC : 100%|██████████| 20/20 [20:48<00:00, 62.45s/it]
+RUNNING EXPERIMENTS WITH HORIZON N=15
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [01:36<30:29, 96.27s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [03:12<28:53, 96.31s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [04:48<27:17, 96.32s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [06:25<25:40, 96.30s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [08:01<24:04, 96.32s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [09:37<22:27, 96.28s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [11:13<20:51, 96.24s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [12:50<19:14, 96.25s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [14:26<17:38, 96.27s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [16:02<16:02, 96.24s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [17:39<14:26, 96.26s/it]Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [19:15<12:50, 96.26s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [20:51<11:13, 96.24s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [22:27<09:37, 96.22s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [24:03<08:01, 96.21s/it]Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [25:40<06:24, 96.23s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [27:16<04:48, 96.26s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [28:52<03:12, 96.27s/it]Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [30:28<01:36, 96.25s/it]Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [32:05<00:00, 96.28s/it]Simulating IC : 100%|██████████| 20/20 [32:05<00:00, 96.26s/it]
+RUNNING EXPERIMENTS WITH HORIZON N=20
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [02:36<49:28, 156.23s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [05:12<46:52, 156.28s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [07:48<44:17, 156.30s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [10:25<41:41, 156.33s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [13:01<39:05, 156.34s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [15:37<36:26, 156.19s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [18:13<33:49, 156.12s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [20:49<31:14, 156.18s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [23:26<28:38, 156.23s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [26:01<26:00, 156.06s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [28:38<23:25, 156.13s/it]Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [31:14<20:49, 156.16s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [33:50<18:12, 156.04s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [36:26<15:36, 156.07s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [39:02<13:00, 156.06s/it]Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [41:38<10:24, 156.16s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [44:15<07:48, 156.23s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [46:51<05:12, 156.25s/it]Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [49:27<02:36, 156.15s/it]Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [52:03<00:00, 156.21s/it]Simulating IC : 100%|██████████| 20/20 [52:03<00:00, 156.18s/it]
+RUNNING EXPERIMENTS WITH HORIZON N=25
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [06:14<1:58:38, 374.68s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [12:29<1:52:25, 374.76s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [18:44<1:46:14, 374.94s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [25:00<1:40:03, 375.22s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [31:15<1:33:47, 375.17s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [37:29<1:27:26, 374.74s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [43:42<1:21:05, 374.30s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [49:58<1:14:56, 374.71s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [56:13<1:08:43, 374.89s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [1:02:27<1:02:24, 374.44s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [1:08:42<56:13, 374.86s/it]  Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [1:14:57<49:57, 374.69s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [1:21:11<43:41, 374.50s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [1:27:24<37:25, 374.28s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [1:33:39<31:11, 374.38s/it]Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [1:39:55<24:59, 374.97s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [1:46:12<18:46, 375.50s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [1:52:29<12:31, 375.84s/it]Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [1:58:43<06:15, 375.38s/it]Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [2:04:59<00:00, 375.57s/it]Simulating IC : 100%|██████████| 20/20 [2:04:59<00:00, 374.98s/it]
+RUNNING EXPERIMENTS WITH HORIZON N=30
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [22:49<7:13:42, 1369.59s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [45:40<6:51:02, 1370.13s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [1:08:29<6:28:03, 1369.60s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [1:31:18<6:05:15, 1369.71s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [1:54:09<5:42:28, 1369.91s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [2:16:53<5:19:10, 1367.92s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [2:39:38<4:56:10, 1367.00s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [3:02:26<4:33:30, 1367.52s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [3:25:14<4:10:44, 1367.65s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [3:48:01<3:47:53, 1367.38s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [4:10:50<3:25:10, 1367.86s/it]Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [4:33:35<3:02:14, 1366.81s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [4:56:20<2:39:24, 1366.42s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [5:19:15<2:16:53, 1368.90s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [5:42:04<1:54:05, 1369.03s/it]Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [6:04:54<1:31:17, 1369.42s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [6:27:43<1:08:27, 1369.06s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [6:50:31<45:37, 1368.95s/it]  Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [7:13:21<22:49, 1369.07s/it]Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [7:36:10<00:00, 1369.18s/it]Simulating IC : 100%|██████████| 20/20 [7:36:10<00:00, 1368.53s/it]
+RUNNING EXPERIMENTS WITH HORIZON N=35
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [1:54:37<36:17:50, 6877.41s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [3:49:22<34:24:36, 6882.03s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [5:43:55<32:28:40, 6877.69s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [7:38:43<30:35:13, 6882.07s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [9:33:21<28:40:06, 6880.40s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [11:27:01<26:40:39, 6859.97s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [13:21:06<24:45:14, 6855.00s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [15:15:46<22:52:36, 6863.01s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [17:10:28<20:59:16, 6868.78s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [19:04:54<19:04:39, 6867.94s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [20:59:33<17:10:41, 6871.31s/it]Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [22:53:37<15:15:04, 6863.03s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [24:48:16<13:21:14, 6867.81s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [26:42:03<11:25:33, 6855.66s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [28:36:13<9:31:10, 6854.05s/it] Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [30:30:53<7:37:26, 6861.66s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [32:25:34<5:43:22, 6867.60s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [34:20:20<3:49:05, 6872.93s/it]Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [36:14:00<1:54:17, 6857.24s/it]Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [38:08:33<00:00, 6861.84s/it]  Simulating IC : 100%|██████████| 20/20 [38:08:33<00:00, 6865.66s/it]
+RUNNING EXPERIMENTS WITH HORIZON N=40
+Simulating IC :   0%|          | 0/20 [00:00<?, ?it/s]Running simulation 1/20 with initial state [0. 0.]
+Simulating IC :   5%|▌         | 1/20 [9:51:26<187:17:19, 35486.27s/it]Running simulation 2/20 with initial state [3.0987 0.171 ]
+Simulating IC :  10%|█         | 2/20 [19:41:51<177:15:07, 35450.44s/it]Running simulation 3/20 with initial state [0.1123 1.2454]
+Simulating IC :  15%|█▌        | 3/20 [29:32:00<167:18:54, 35431.42s/it]Running simulation 4/20 with initial state [4.971  0.2417]
+Simulating IC :  20%|██        | 4/20 [39:22:45<157:29:49, 35436.84s/it]Running simulation 5/20 with initial state [0.7782 1.0774]
+Simulating IC :  25%|██▌       | 5/20 [49:13:38<147:40:38, 35442.56s/it]Running simulation 6/20 with initial state [3.9686 3.5292]
+Simulating IC :  30%|███       | 6/20 [59:00:00<137:29:18, 35354.18s/it]Running simulation 7/20 with initial state [4.3851 3.0218]
+Simulating IC :  35%|███▌      | 7/20 [68:45:57<127:26:04, 35289.60s/it]Running simulation 8/20 with initial state [5.0827 0.2213]
+Simulating IC :  40%|████      | 8/20 [78:35:35<117:43:33, 35317.80s/it]Running simulation 9/20 with initial state [4.4629 1.0942]
+Simulating IC :  45%|████▌     | 9/20 [88:26:43<108:03:32, 35364.80s/it]Running simulation 10/20 with initial state [7.9678 3.3682]
+Simulating IC :  50%|█████     | 10/20 [98:13:53<98:07:12, 35323.23s/it]Running simulation 11/20 with initial state [0.4761 1.2418]
+Simulating IC :  55%|█████▌    | 11/20 [108:03:39<88:21:21, 35342.38s/it]Running simulation 12/20 with initial state [6.96   2.7167]
+Simulating IC :  60%|██████    | 12/20 [117:51:36<78:29:39, 35322.40s/it]Running simulation 13/20 with initial state [0.7879 3.593 ]
+Simulating IC :  65%|██████▌   | 13/20 [127:37:22<68:34:43, 35269.10s/it]Running simulation 14/20 with initial state [1.6461 2.8885]
+Simulating IC :  70%|███████   | 14/20 [137:24:19<58:45:19, 35253.21s/it]Running simulation 15/20 with initial state [1.8508 2.7474]
+Simulating IC :  75%|███████▌  | 15/20 [147:11:08<48:56:39, 35239.96s/it]Running simulation 16/20 with initial state [1.6349 0.4223]
+Simulating IC :  80%|████████  | 16/20 [157:02:35<39:14:16, 35314.13s/it]Running simulation 17/20 with initial state [3.4825 1.38  ]
+Simulating IC :  85%|████████▌ | 17/20 [167:01:01<29:34:36, 35492.28s/it]Running simulation 18/20 with initial state [2.0084 1.6001]
+Simulating IC :  90%|█████████ | 18/20 [176:51:19<19:42:20, 35470.03s/it]Running simulation 19/20 with initial state [5.2996 3.0011]
+Simulating IC :  95%|█████████▌| 19/20 [186:37:29<9:49:39, 35379.76s/it] Running simulation 20/20 with initial state [1.848  0.5585]
+Simulating IC : 100%|██████████| 20/20 [196:27:58<00:00, 35394.62s/it]  Simulating IC : 100%|██████████| 20/20 [196:27:58<00:00, 35363.93s/it]
