@@ -20,7 +20,7 @@ with torch.no_grad():
     torch.set_default_dtype(torch.float32)
     torch.set_default_device('cpu')
     # nstep_list = [10, 15]
-    nstep_list = [10, 15, 20, 25, 30, 35, 40]
+    nstep_list = [10, 15, 20, 25, 30, 40]
 
 
     # Load CPLEX data
