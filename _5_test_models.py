@@ -171,9 +171,10 @@ with torch.no_grad():
             print(f"RSM = None")
         print(f"MIT = {im_data[f'N={nsteps}'][0]['MIT']:.5f}")
         
+        data_gen_time = np.load(f"imitation_learning_data/data_N{nsteps}.npz")['stop_time']
         imitation_training_data = torch.load(f'training_outputs/imitation_learning/models/training_data_N{nsteps}.pt')
         print(f"NTP = {imitation_training_data['NTP']}")
-        print(f"TT = {imitation_training_data['TT']}")
+        print(f"TT = {imitation_training_data['TT']+data_gen_time}")
         print(f"Number of data samples = {imitation_training_data['num_data']}")
 
     del im_data
