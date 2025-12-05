@@ -53,8 +53,8 @@ x1_min = 0.0
 x2_max = 3.6
 x2_min = 0.0
 input_energy_max = 8.0
-# original 3.5, 2.5
-fig1, ax = plt.subplots(1,1, figsize=(3.5,2),sharex=False)
+# original 3.5, 2
+fig1, ax = plt.subplots(1,1, figsize=(3.5,1.8),sharex=False)
 
 # indexes = [0,1,3,5,9,11,12,4]
 
