@@ -7,7 +7,7 @@ from collections import defaultdict
 import torch
 from torch import nn
 
-from ste import diffFloor, diffBinarize, diffGumbelBinarize, thresholdBinarize
+from utils.ste import diffFloor, diffBinarize, diffGumbelBinarize, thresholdBinarize
 
 class roundModel(nn.Module):
     """

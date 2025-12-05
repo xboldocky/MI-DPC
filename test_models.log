@@ -1,0 +1,305 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/home/desktop309/git/MI-DPC_Conference_paper/_5_test_models.py", line 3, in <module>
+    import neuromancer
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/neuromancer/__init__.py", line 10, in <module>
+    from neuromancer import dataset
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/neuromancer/dataset.py", line 7, in <module>
+    import pandas as pd
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pandas/__init__.py", line 26, in <module>
+    from pandas.compat import (
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pandas/compat/__init__.py", line 27, in <module>
+    from pandas.compat.pyarrow import (
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pandas/compat/pyarrow.py", line 8, in <module>
+    import pyarrow as pa
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pyarrow/__init__.py", line 65, in <module>
+    import pyarrow.lib as _lib
+AttributeError: _ARRAY_API not found
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/home/desktop309/git/MI-DPC_Conference_paper/_5_test_models.py", line 3, in <module>
+    import neuromancer
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/neuromancer/__init__.py", line 10, in <module>
+    from neuromancer import dataset
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/neuromancer/dataset.py", line 7, in <module>
+    import pandas as pd
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pandas/__init__.py", line 49, in <module>
+    from pandas.core.api import (
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pandas/core/api.py", line 9, in <module>
+    from pandas.core.dtypes.dtypes import (
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pandas/core/dtypes/dtypes.py", line 24, in <module>
+    from pandas._libs import (
+  File "/home/desktop309/git/.venv/lib/python3.11/site-packages/pyarrow/__init__.py", line 65, in <module>
+    import pyarrow.lib as _lib
+AttributeError: _ARRAY_API not found
+/home/desktop309/git/.venv/lib/python3.11/site-packages/torch/utils/_device.py:103: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  return func(*args, **kwargs)
+####################################################################################################
+####################################################################################################
+CPLEX data analysis
+----------------------------------------------------------------------------------------------------
+N=10
+L mean = 5.843378222325237
+MIT = 0.0030634004230876053
+FUP = 0.0
+----------------------------------------------------------------------------------------------------
+N=15
+L mean = 4.412315152581246
+MIT = 0.008544540812608971
+FUP = 0.0
+----------------------------------------------------------------------------------------------------
+N=20
+L mean = 4.015206334355445
+MIT = 0.042125146222254585
+FUP = 0.0
+----------------------------------------------------------------------------------------------------
+N=25
+L mean = 3.888901348124384
+MIT = 0.2507174808967578
+FUP = 0.04271222651004791
+----------------------------------------------------------------------------------------------------
+N=30
+L mean = 3.84705237148144
+MIT = 1.3140732391658339
+FUP = 2.442605495452881
+----------------------------------------------------------------------------------------------------
+N=35
+L mean = 2.7647937243040177
+MIT = 14.274531705038333
+FUP = 11.918488502502441
+####################################################################################################
+####################################################################################################
+Sigmoid STE data analysis
+/home/desktop309/git/.venv/lib/python3.11/site-packages/torch/utils/_device.py:103: UserWarning: Using a target size (torch.Size([])) that is different to the input size (torch.Size([1, 1874, 1])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return func(*args, **kwargs)
+/home/desktop309/git/.venv/lib/python3.11/site-packages/torch/utils/_device.py:103: UserWarning: Using a target size (torch.Size([])) that is different to the input size (torch.Size([1, 1873, 1])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return func(*args, **kwargs)
+----------------------------------------------------------------------------------------------------
+N = 10
+L mean = 6.81923
+RSM = 14.3102
+MIT = 0.00019
+NTP = 82603
+TT = 231.6466977596283
+----------------------------------------------------------------------------------------------------
+N = 15
+L mean = 4.60304
+RSM = 4.1435
+MIT = 0.00019
+NTP = 84003
+TT = 347.5512089729309
+----------------------------------------------------------------------------------------------------
+N = 20
+L mean = 4.19892
+RSM = 4.3752
+MIT = 0.00019
+NTP = 85403
+TT = 214.39045786857605
+----------------------------------------------------------------------------------------------------
+N = 25
+L mean = 3.94508
+RSM = 1.4240
+MIT = 0.00019
+NTP = 86803
+TT = 440.8222222328186
+----------------------------------------------------------------------------------------------------
+N = 30
+L mean = 3.89197
+RSM = 1.1542
+MIT = 0.00019
+NTP = 88203
+TT = 410.2597749233246
+----------------------------------------------------------------------------------------------------
+N = 35
+L mean = 3.85687
+RSM = 28.3151
+MIT = 0.00019
+NTP = 89603
+TT = 564.4944422245026
+----------------------------------------------------------------------------------------------------
+N = 40
+L mean = 3.85037
+RSM = None
+MIT = 0.00019
+NTP = 91003
+TT = 444.1767337322235
+####################################################################################################
+####################################################################################################
+Imitation Learning data analysis
+----------------------------------------------------------------------------------------------------
+N = 10
+L mean = 5.87401
+RSM = 0.5215
+MIT = 0.00019
+NTP = 82603
+TT = 72.47004795074463
+Number of data samples = 23933
+----------------------------------------------------------------------------------------------------
+N = 15
+L mean = 4.48078
+RSM = 1.5281
+MIT = 0.00019
+NTP = 84003
+TT = 72.27968049049377
+Number of data samples = 23913
+----------------------------------------------------------------------------------------------------
+N = 20
+L mean = 4.06216
+RSM = 1.1560
+MIT = 0.00019
+NTP = 85403
+TT = 72.15586924552917
+Number of data samples = 23899
+----------------------------------------------------------------------------------------------------
+N = 25
+L mean = 3.96540
+RSM = 1.9292
+MIT = 0.00019
+NTP = 86803
+TT = 72.80320525169373
+Number of data samples = 23879
+----------------------------------------------------------------------------------------------------
+N = 30
+L mean = 3.89658
+RSM = 1.2711
+MIT = 0.00019
+NTP = 88203
+TT = 72.5148458480835
+Number of data samples = 23859
+----------------------------------------------------------------------------------------------------
+N = 35
+L mean = 3.95774
+RSM = 30.1420
+MIT = 0.00019
+NTP = 89603
+TT = 40.598392963409424
+Number of data samples = 13462
+----------------------------------------------------------------------------------------------------
+N = 40
+L mean = 4.99758
+RSM = None
+MIT = 0.00019
+NTP = 91003
+TT = 12.41222357749939
+Number of data samples = 4424
+####################################################################################################
+####################################################################################################
+Softmax STE data analysis
+----------------------------------------------------------------------------------------------------
+N = 10
+L mean = 6.76038
+RSM = 13.5643
+MIT = 0.00018
+NTP = 83026
+TT = 223.2731556892395
+----------------------------------------------------------------------------------------------------
+N = 15
+L mean = 4.79903
+RSM = 8.0582
+MIT = 0.00018
+NTP = 84426
+TT = 281.5616145133972
+----------------------------------------------------------------------------------------------------
+N = 20
+L mean = 4.11252
+RSM = 2.3663
+MIT = 0.00018
+NTP = 85826
+TT = 373.3109791278839
+----------------------------------------------------------------------------------------------------
+N = 25
+L mean = 3.93284
+RSM = 1.1172
+MIT = 0.00018
+NTP = 87226
+TT = 432.68623757362366
+----------------------------------------------------------------------------------------------------
+N = 30
+L mean = 3.90025
+RSM = 1.3639
+MIT = 0.00018
+NTP = 88626
+TT = 317.33048963546753
+----------------------------------------------------------------------------------------------------
+N = 35
+L mean = 3.85285
+RSM = 28.2403
+MIT = 0.00018
+NTP = 90026
+TT = 550.3090968132019
+----------------------------------------------------------------------------------------------------
+N = 40
+L mean = 3.86317
+RSM = None
+MIT = 0.00018
+NTP = 91426
+TT = 393.3625774383545
+####################################################################################################
+####################################################################################################
+Learnable Threshold data analysis
+----------------------------------------------------------------------------------------------------
+N = 10
+L mean = 6.41858
+RSM = 8.9615
+MIT = 0.00042
+NTP = 78191
+TT = 429.9897541999817
+----------------------------------------------------------------------------------------------------
+N = 15
+L mean = 4.53471
+RSM = 2.6990
+MIT = 0.00042
+NTP = 80091
+TT = 573.8098156452179
+----------------------------------------------------------------------------------------------------
+N = 20
+L mean = 4.08385
+RSM = 1.6810
+MIT = 0.00042
+NTP = 81991
+TT = 664.5666193962097
+----------------------------------------------------------------------------------------------------
+N = 25
+L mean = 3.90683
+RSM = 0.4590
+MIT = 0.00042
+NTP = 83891
+TT = 845.7364530563354
+----------------------------------------------------------------------------------------------------
+N = 30
+L mean = 3.86307
+RSM = 0.4146
+MIT = 0.00041
+NTP = 85791
+TT = 821.4241962432861
+----------------------------------------------------------------------------------------------------
+N = 35
+L mean = 3.84507
+RSM = 28.0952
+MIT = 0.00041
+NTP = 87691
+TT = 1111.97709608078
+----------------------------------------------------------------------------------------------------
+N = 40
+L mean = 3.84013
+RSM = None
+MIT = 0.00041
+NTP = 89591
+TT = 1080.8954899311066
+...DONE...
