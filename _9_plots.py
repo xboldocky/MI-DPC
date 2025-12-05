@@ -54,7 +54,7 @@ x2_max = 3.6
 x2_min = 0.0
 input_energy_max = 8.0
 # original 3.5, 2.5
-fig1, ax = plt.subplots(1,1, figsize=(3.5,1.5),sharex=False)
+fig1, ax = plt.subplots(1,1, figsize=(3.5,2),sharex=False)
 
 # indexes = [0,1,3,5,9,11,12,4]
 
@@ -87,8 +87,8 @@ plt.grid()
 fig1.show()
 plt.gcf().set_tight_layout(True)
 
-fig1.savefig(f'plots/phase_plotv2.pdf', bbox_inches='tight',pad_inches=0.05,transparent=True)
-fig1.savefig(f'plots/phase_plotv2.pgf', bbox_inches='tight', pad_inches=0.05,transparent=True)
+fig1.savefig(f'plots/phase_plotv2_large.pdf', bbox_inches='tight',pad_inches=0.05,transparent=True)
+fig1.savefig(f'plots/phase_plotv2_large.pgf', bbox_inches='tight', pad_inches=0.05,transparent=True)
 # %%
 ###
 ### Control Plot
@@ -156,7 +156,7 @@ trajectories = {
     'R': torch.cat((torch.ones(1,s_length,1)*4.2, torch.ones(1,s_length,1)*1.8), -1).view(1,-1,2)
 }
 
-fig1, ax = plt.subplots(4,2, figsize=(7.16, 3.5),sharex=True) # original 7.16, 4.5
+fig1, ax = plt.subplots(4,2, figsize=(7.16, 4),sharex=True) # original 7.16, 4.5
 
 
 ax[0,0].plot(time_vector[:until],trajectories['R'][:,:until,0][0].to('cpu').detach().numpy(), '-',linewidth=1, color='black')
