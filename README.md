@@ -35,7 +35,7 @@ All trained policies are compared against the exact CPLEX solution on cost, mean
 A two-state storage model sampled at 5-minute intervals, simulated over ~6.5 days (1873 steps).
 
 - **States** `x1, x2` [kWh] — storage levels, bounded to `[0, 8.4]` and `[0, 3.6]`
-- **Inputs** `u1, u2` [kW] continuous, `$\delta$ 1 ∈ {0,1,2,3}` [kW] integer
+- **Inputs** `u1, u2` [kW] continuous, $\delta \in \{0, 1, 2, 3\}$ [kW] integer
 - **Disturbances** `d1, d2` [kW] — exogenous loads
 - **Setpoint** `(4.2, 1.8)` kWh
 - **Horizons** `N ∈ {10, 15, 20, 25, 30, 35, 40}`
