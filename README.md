@@ -4,11 +4,7 @@
 
 Reference implementation and reproduction scripts for the paper **Learning to Solve Parametric Mixed-Integer Optimal Control Problems via Differentiable Predictive Control**. The method extends [Differentiable Predictive Control](https://www.sciencedirect.com/science/article/pii/S0959152422000981) to systems with mixed-integer decision variables.
 
-<div style="background:white">
-
-![MI-DPC diagram](aux/images/MI-DPC_method.png)
-
-</div>
+![MI-DPC diagram](aux/images/MI-DPC_wht.png)
 
 > Online mixed-integer optimal control (MI-OCP) requires solving an NP-hard mixed-integer quadratic program (MIQP) at every sampling instant; computational cost grows quickly with problem size (horizon length). **MI-DPC** trains a neural control policy $\pi_\theta$ offline to map parameters $\xi_k = [x_k^\top, d_k^\top, \dots, d_{k+N}^\top]^\top$ directly to continuous and integer control decisions $[u_k^\top, \delta_k^\top]^\top$, constituting an explicit solution and thus avoiding online optimization.
 
