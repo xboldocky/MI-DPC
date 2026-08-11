@@ -27,7 +27,7 @@ This repository implements MI-DPC with three different rounding strategies and a
 
 ### Dynamics 
 
-Second-order LTI thermal system with two heat pumps and a bank of heating rods. Sampling period $T = 300\,\mathrm{s}$, 1873 steps ($\approx$ 6.5 days). Problem desing inspired by (Löhr et al., 2019):
+Second-order LTI thermal system with two heat pumps and a bank of heating rods. Sampling period $T = 300 \mathrm{s}$, 1873 steps ($\approx$ 6.5 days). Problem desing inspired by (Löhr et al., 2019):
 
 $$x_{k+1} = A x_k + B_\mathrm{u} u_k + B_\delta \delta_k + E d_k,$$
 
@@ -116,7 +116,7 @@ The backward pass replaces the zero gradient of rounding with the derivative of 
 
 $$\nabla \delta_k \approx \nabla \sigma\big(\eta(y_k^{(\delta)} - \lfloor(y_k^{(\delta)}\rfloor - t)\big)$$
 
-Larger $\eta$ tracks the rounding function more closely but yields steeper gradients. This repository uses $\eta = 10$ and clips $y^{(\delta)}$ to $[-0.49,\,3.49]$ so $\delta \in \{0,1,2,3\}$.
+Larger $\eta$ tracks the rounding function more closely but yields steeper gradients. This repository uses $\eta = 10$ and clips $y^{(\delta)}$ to $[-0.49,3.49]$ so $\delta \in \{0,1,2,3\}$.
 
 The STE is implemented as a detach trick (no custom autograd function):
 
@@ -132,7 +132,7 @@ def _relaxed_round(x, slope=10.0):
 
 Integrality is cast as **categorical classification**. For each integer input $j$, the network outputs logits $S_{k|j} = [s_{k|1}, \dots, s_{k|L_j}]^\top$ over $L_j$ admissible values $A_j = [a_1, \dots, a_{L_j}]^\top$. Logits are perturbed with Gumbel $(0,1)$ noise and normalized with temperature $\tau$:
 
-$$\hat{s}_{k|i} = \frac{\exp\big((\log s_{k|i} + g_{k|i})\,\tau^{-1}\big)}{\sum_{m=1}^{L_j} \exp\big((\log s_{k|m} + g_{k|m})\,\tau^{-1}\big)}, \qquad g \sim \mathrm{Gumbel}(0,1).$$
+$$\hat{s}_{k|i} = \frac{\exp\big((\log s_{k|i} + g_{k|i})\tau^{-1}\big)}{\sum_{m=1}^{L_j} \exp\big((\log s_{k|m} + g_{k|m})\tau^{-1}\big)}, \qquad g \sim \mathrm{Gumbel}(0,1).$$
 
 The forward pass selects the arg-max category (hard one-hot $\bar{S}_{k|j}$) and maps it to the integer value:
 
