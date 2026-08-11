@@ -267,7 +267,7 @@ If you use this methodology in your work, please cite our work as:
 
 ## Acknowledgements
 
-Supported by Horizon Europe grant no. 101079342 ([FrontSeat](https://frontseat.stuba.sk/)) and the Ralph O'Connor Sustainable Energy Institute at Johns Hopkins University.
+Supported by Horizon Europe grant no. 101079342 ([FrontSeat](https://frontseat.stuba.sk/)) and the [Ralph O'Connor Sustainable Energy Institute at Johns Hopkins University](https://energyinstitute.jhu.edu/).
 
 <p align="center">
   <img src="aux/images/logos/frontseat.png" alt="FrontSeat, Horizon Europe grant no. 101079342" height="128">
