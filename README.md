@@ -114,7 +114,7 @@ $$\delta_k = \lfloor y_k^{(\delta)} \rceil, \qquad u_k = y_k^{(u)}.$$
 
 The backward pass replaces the zero gradient of rounding with the derivative of a sigmoid surrogate. With slope $\eta > 1$ and rounding threshold $t = 0.5$,
 
-$$\nabla \delta_k \approx \nabla \sigma\big(\eta\;(y_k^{(\delta)} - \lfloor(y_k^{(\delta)}\rfloor - t)\big)$$
+$$\nabla \delta_k \approx \nabla \sigma\big(\eta(y_k^{(\delta)} - \lfloor(y_k^{(\delta)}\rfloor - t)\big)$$
 
 Larger $\eta$ tracks the rounding function more closely but yields steeper gradients. This repository uses $\eta = 10$ and clips $y^{(\delta)}$ to $[-0.49,\,3.49]$ so $\delta \in \{0,1,2,3\}$.
 
