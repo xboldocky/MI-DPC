@@ -53,12 +53,7 @@ Heating rods are weighted cheaper than heat pumps so the integer input is exerci
 
 The control objective is defined by a loss function where a control error between state $x$ and respective reference $r$ value is penalized, as well as control effort of both $u$ and $\delta$. Constraints are relaxed with the penalty method:
 
-$$
-\min_\theta \mathbb{E}_{\xi_k \sim \mathcal{P}_\xi}
-\Big[ \lVert x_N - r_N \rVert_P^2 + \sum_{k=0}^{N-1} \lVert x_k - r_k \rVert_Q^2
-+ \lVert u_k \rVert_R^2 + \lVert \delta_k \rVert_\rho^2
-+ c_x q(x_k, x_N) + c_u p(u_k, \delta_k) \Big],
-$$
+$$ \min_\theta \mathbb{E}_{\xi_k \sim \mathcal{P}_\xi} \Big[ \lVert x_N - r_N \rVert_P^2 + \sum_{k=0}^{N-1} \lVert x_k - r_k \rVert_Q^2 + \lVert u_k \rVert_R^2 + \lVert \delta_k \rVert_\rho^2 + c_x q(x_k, x_N) + c_u p(u_k, \delta_k) \Big], $$
 
 with $c_x = c_u = 25$. In code: NeuroMANCER `PenaltyLoss` on `variable('X')` and `variable('U')`, penalizing violations, $u \ge 0$, and $0 \le u_1 + u_2 \le 8$ as well as $0\leq x_1 \leq 8.4$ and $0\leq x_2 \leq 3.6$.
 
