@@ -270,11 +270,11 @@ If you use this methodology in your work, please cite our work as:
 Supported by Horizon Europe grant no. 101079342 ([FrontSeat](https://frontseat.stuba.sk/)) and the Ralph O'Connor Sustainable Energy Institute at Johns Hopkins University.
 
 <p align="center">
-  <img src="aux/images/logos/frontseat.png" alt="FrontSeat, Horizon Europe grant no. 101079342" height="169">
-  <img src="aux/images/STU-anfv.png" alt="Slovak University of Technology in Bratislava" height="169">
+  <img src="aux/images/logos/frontseat.png" alt="FrontSeat, Horizon Europe grant no. 101079342" height="128">
+  <img src="aux/images/STU-anfv.png" alt="Slovak University of Technology in Bratislava" height="128">
   <br>
-  <img src="aux/images/logos/rub.png" alt="Ruhr University Bochum" height="145">
-  <img src="aux/images/logos/lrs.png" alt="Chair of Automatic Control and Systems Theory, Ruhr University Bochum" height="145">
+  <img src="aux/images/logos/rub.png" alt="Ruhr University Bochum" height="110">
+  <img src="aux/images/logos/lrs.png" alt="Chair of Automatic Control and Systems Theory, Ruhr University Bochum" height="110">
   <img src="aux/images/logos/jhu.png" alt="Ralph O'Connor Sustainable Energy Institute, Johns Hopkins University" height="170">
   <br>
 </p>
