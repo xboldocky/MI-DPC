@@ -164,68 +164,8 @@ Adam, lr $3 \times 10^{-4}$, batch 2000, up to 1000 epochs (20 warm-up, early st
 * [PyTorch](https://pytorch.org/) 2.8 (CUDA recommended for training)
 * [NeuroMANCER](https://github.com/pnnl/neuromancer) 1.5.6
 * NumPy, SciPy, Matplotlib, tqdm
-* [CVXPY](https://www.cvxpy.org/) + mixed-integer solver (CPLEX 22.1.2 in the paper; `--solver gurobi` also supported in step 6)
+* [CVXPY](https://www.cvxpy.org/) + mixed-integer solver (CPLEX 22.1.2 in the paper)
 * LaTeX with `pdflatex` for PGF export in `_8_plots.py`
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install torch numpy scipy matplotlib tqdm cvxpy neuromancer==1.5.6
-# CPLEX bindings from your IBM installation, e.g.:
-pip install cplex docplex
-```
-
-CPLEX is not required to train or evaluate learned controllers: reference MIQP trajectories and trained models are included.
-
-## Reproducing the results
-
-Run scripts from the repository root in order. Steps 1 and 3 are expensive; later steps can use committed artefacts.
-
-**1. Optimal MIQP baseline**
-
-```bash
-python _1_CPLEX.py -ic 0        # one initial condition, all horizons
-./run_1_CPLEX.sh                # all 20 in parallel (cores 10–29)
-```
-
-Output: `CPLEX_inference_data/N{N}/cvxpy_cplex_ic{i}.pt`. Tolerances: `mipgap = 1e-16`, single thread, 2 h cap per horizon. Parallel launcher needs 20+ free cores; otherwise loop over `-ic`.
-
-**2. Train MI-DPC policies**
-
-```bash
-python _2_sigmoid.py
-python _3_softmax.py
-python _4_learnable_threshold.py
-```
-
-Output: `training_outputs/{sigmoid,softmax,lt}/models/model_*_N{N}.pt` and `training_data_N{N}.pt` (parameter count, training time).
-
-**3. Imitation learning** (optional)
-
-```bash
-python _6_imitation_learning_data_generation.py --solver cplex --nsteps 20
-./run_7_imitation_learning_data_generation.sh   # all horizons in parallel
-python _7_imitation_learning_policy_synthesis.py
-```
-
-Up to 24 000 open-loop MIQPs per horizon, 2 h generation budget per horizon.
-
-**4. Evaluate**
-
-```bash
-python _5_test_models.py        # or ./run_5_test_models.sh
-```
-
-Output: `simulation_data/{sigmoid,softmax,lt,imitation}.pt`; sample log in `test_models.log`.
-
-**5. Plot**
-
-```bash
-python _8_plots.py              # -> plots/fig1v2.*, plots/phase_plotv2_large.*
-```
-
-`_0_generate_synthetic_disturbance_data.py` documents synthetic disturbance generation. The save call is commented out — regenerating shifts reported numbers.
 
 ## Repository layout
 
