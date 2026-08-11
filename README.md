@@ -32,10 +32,10 @@ Second-order LTI thermal system with two heat pumps and a bank of heating rods. 
 $$x_{k+1} = A x_k + B_\mathrm{u} u_k + B_\delta \delta_k + E d_k,$$
 
 $$
-A = \begin{bmatrix} \alpha_1 & \nu \\ 0 & \alpha_2 - \nu \end{bmatrix},\quad
-B_\mathrm{u} = \begin{bmatrix} b_1 & 0 \\ 0 & b_2 \end{bmatrix},\quad
-B_\delta = \begin{bmatrix} 0 \\ b_3 \end{bmatrix},\quad
-E = \begin{bmatrix} -b_4 & 0 \\ 0 & -b_5 \end{bmatrix},
+A = \begin{bmatrix} \alpha_1 & \nu \\\\ 0 & \alpha_2 - \nu \end{bmatrix},\quad
+B_\mathrm{u} = \begin{bmatrix} b_1 & 0 \\\\ 0 & b_2 \end{bmatrix},\quad
+B_\delta = \begin{bmatrix} 0 \\\\ b_3 \end{bmatrix},\quad
+E = \begin{bmatrix} -b_4 & 0 \\\\ 0 & -b_5 \end{bmatrix},
 $$
 
 with $\alpha_1 = 0.9983$, $\alpha_2 = 0.9966$, $\nu = 0.001$, $b_1 = b_2 = 0.075$, $b_3 = 0.0825$, $b_4 = b_5 = 0.0833$.
