@@ -2,8 +2,10 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.19646-b31b1b.svg)](https://arxiv.org/abs/2506.19646)
 
-Reference implementation and reproduction scripts for the paper **Learning to Solve Parametric Mixed-Integer Optimal Control Problems via Differentiable Predictive Control**. The method extends [Differentiable Predictive Control](https://www.sciencedirect.com/science/article/pii/S0959152422000981) to systems with mixed-integer decision variables. We provide a live google colab example code of MI-DPC with a similar problem setup 
-<a target="_blank" href="https://colab.research.google.com/github/pnnl/neuromancer/blob/master/examples/control/Part_6_mixed_integer_decisions.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+Reference implementation and reproduction scripts for the paper **Learning to Solve Parametric Mixed-Integer Optimal Control Problems via Differentiable Predictive Control**. The method extends [Differentiable Predictive Control](https://www.sciencedirect.com/science/article/pii/S0959152422000981) to systems with mixed-integer decision variables.
+
+ We provide an instructive live Google Colab example code of MI-DPC with a similar problem setup
+<a target="_blank" href="https://colab.research.google.com/github/pnnl/neuromancer/blob/master/examples/control/Part_6_mixed_integer_decisions.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>.
 
 ![MI-DPC diagram](aux/images/MI-DPC_wht.png)
 
