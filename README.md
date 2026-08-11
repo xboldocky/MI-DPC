@@ -102,12 +102,6 @@ Table 1 from the paper (20 initial conditions, 1873 steps):
 
 ## Method and implementation
 
-
-### Policy network
-
-All learned controllers share one backbone: linear input layer ($n_\xi = 2 + 2N$), $\tanh$ + non-affine `LayerNorm`, then two branches — $\tanh$ with dropout 0.1 for $u \in \mathbb{R}^2$, SELU for the integer head. The learnable-threshold variant adds a second network (95 vs. 140 input features). One policy is trained per horizon.
-Rollouts use NeuroMANCER `SystemPreview`, sliding the disturbance window forward and zero-padding the tail.
-
 ### Rounding strategies
 
 The integer head outputs a relaxed value $y_k^{(\delta)} \in \mathbb{R}^{n_\delta}$. Integrality is enforced by a discrete rounding layer at the output; because rounding is non-differentiable, gradients $\partial \delta / \partial \theta$ are approximated with a **straight-through estimator (STE)**: the forward pass uses the hard discrete value, while the backward pass substitutes a differentiable surrogate (Bengio et al., 2013).
@@ -120,7 +114,7 @@ $$\delta_k = \lfloor y_k^{(\delta)} \rceil, \qquad u_k = y_k^{(u)}.$$
 
 The backward pass replaces the zero gradient of rounding with the derivative of a sigmoid surrogate. With slope $\eta > 1$ and rounding threshold $t = 0.5$,
 
-$$\nabla \delta_k \approx \nabla \sigma\!\big(\eta\;(y_k^{(\delta)} - \lfloor(y_k^{(\delta)}\rfloor - t)\big)$$
+$$\nabla \delta_k \approx \nabla \sigma\big(\eta\;(y_k^{(\delta)} - \lfloor(y_k^{(\delta)}\rfloor - t)\big)$$
 
 Larger $\eta$ tracks the rounding function more closely but yields steeper gradients. This repository uses $\eta = 10$ and clips $y^{(\delta)}$ to $[-0.49,\,3.49]$ so $\delta \in \{0,1,2,3\}$.
 
@@ -138,7 +132,7 @@ def _relaxed_round(x, slope=10.0):
 
 Integrality is cast as **categorical classification**. For each integer input $j$, the network outputs logits $S_{k|j} = [s_{k|1}, \dots, s_{k|L_j}]^\top$ over $L_j$ admissible values $A_j = [a_1, \dots, a_{L_j}]^\top$. Logits are perturbed with Gumbel $(0,1)$ noise and normalized with temperature $\tau$:
 
-$$\hat{s}_{k|i} = \frac{\exp\!\big((\log s_{k|i} + g_{k|i})\,\tau^{-1}\big)}{\sum_{m=1}^{L_j} \exp\!\big((\log s_{k|m} + g_{k|m})\,\tau^{-1}\big)}, \qquad g \sim \mathrm{Gumbel}(0,1).$$
+$$\hat{s}_{k|i} = \frac{\exp\big((\log s_{k|i} + g_{k|i})\,\tau^{-1}\big)}{\sum_{m=1}^{L_j} \exp\big((\log s_{k|m} + g_{k|m})\,\tau^{-1}\big)}, \qquad g \sim \mathrm{Gumbel}(0,1).$$
 
 The forward pass selects the arg-max category (hard one-hot $\bar{S}_{k|j}$) and maps it to the integer value:
 
@@ -146,7 +140,7 @@ $$\delta_{k|j} = \bar{S}_{k|j}^\top A_j, \qquad u_k = y_k^{(u)}.$$
 
 Because one-hot encoding is non-differentiable, the backward pass uses the soft probabilities $\hat{S}_{k|j}$ instead (STE):
 
-$$\nabla \delta_{k|j} \approx \nabla\!\big(\hat{S}_{k|j}^\top A_j\big).$$
+$$\nabla \delta_{k|j} \approx \nabla\big(\hat{S}_{k|j}^\top A_j\big).$$
 
 Gumbel noise encourages exploration during training; it is disabled at evaluation (`enable_gumbels = False` in `_5_test_models.py`). This repository uses $\tau = 0.5$ and $A = \{0,1,2,3\}$. Unlike sigmoid STE, this formulation supports **arbitrary, unevenly spaced** integer sets.
 
