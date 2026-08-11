@@ -25,7 +25,7 @@ for i in "${!nsteps_list[@]}"; do
 
     echo "Launching --nsteps ${nsteps} on CPU ${cpu}, logging to ${log}"
 
-    nohup taskset -c "${cpu}" "${env}" -u _7_imitation_learning_data_generation.py \
+    nohup taskset -c "${cpu}" "${env}" -u _6_imitation_learning_data_generation.py \
         --solver "${solver}" \
         --nsteps "${nsteps}" \
         > "${log}" 2>&1 &

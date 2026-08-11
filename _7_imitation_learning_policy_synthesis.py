@@ -11,7 +11,6 @@ from neuromancer.trainer import Trainer
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-from utils import systempreview
 import importlib, time
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

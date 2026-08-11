@@ -12,7 +12,6 @@ from neuromancer.trainer import Trainer
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-from utils import systempreview
 import importlib, time
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -133,7 +132,6 @@ for nsteps in [10,15,20,25,30,35,40]:
 
     #%% System architecture
     system = Node(ss_model, ['X', 'U', 'D'], ['X'], name='system')
-    # importlib.reload(systempreview)
 
     cl_system = SystemPreview([mip_node,system],  
                             preview_keys_map={'D': ['mip_policy']},
